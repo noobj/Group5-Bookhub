@@ -8,4 +8,11 @@
     <string name="btnSignIn">Sign In</string>
     <string name="tvAccountLogin">Don\'t have an account?</string>
     <string name="tvLoginSignUp">Sign Up</string>
+    <string name="tvRegister">Register</string>
+    <string name="tvRegisterToLogin">Please register to login.</string>
+    <string name="txtName">Name</string>
+    <string name="txtAddress">Address</string>
+    <string name="txtPhone">Phone Number</string>
+    <string name="txtRePassword">Re-enter Password</string>
+    <string name="tvHaveAccount">Already have an account?</string>
 </resources>
