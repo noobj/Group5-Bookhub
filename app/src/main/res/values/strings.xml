@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Group5-BookHub</string>
+    <string name="txtLogin">Login</string>
+    <string name="imgLogin">Login Image</string>
+    <string name="txtSignInToContinue">Please Sign in to continue</string>
+    <string name="txtLoginHint">Email</string>
+    <string name="txtPasswordHint">Password</string>
+    <string name="btnSignIn">Sign In</string>
+    <string name="tvAccountLogin">Don\'t have an account?</string>
+    <string name="tvLoginSignUp">Sign Up</string>
 </resources>
