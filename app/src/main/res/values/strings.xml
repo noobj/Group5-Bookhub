@@ -15,4 +15,9 @@
     <string name="txtPhone">Phone Number</string>
     <string name="txtRePassword">Re-enter Password</string>
     <string name="tvHaveAccount">Already have an account?</string>
+    <string name="tvBookHub">Book Hub</string>
+    <string name="btnMainBuyBook">Buy a Book</string>
+    <string name="btnMainSellBook">Sell a Book</string>
+    <string name="btnMainOrder">Order Details</string>
+    <string name="btnMainProfile">User Profile</string>
 </resources>
