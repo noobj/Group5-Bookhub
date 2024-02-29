@@ -34,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.009"
-        tools:srcCompat="@drawable/loginImage" />
+        tools:srcCompat="@drawable/login" />
 
     <TextView
         android:id="@+id/tvSignInToContinue"
