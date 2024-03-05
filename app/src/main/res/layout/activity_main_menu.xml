@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/material_dynamic_primary90"
+    tools:context=".MainMenu">
+
+    <TextView
+        android:id="@+id/mainMenuTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvBookHub"
+        android:textColor="@color/material_dynamic_primary30"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.076" />
+
+    <Button
+        android:id="@+id/btnMainMenuBuyBook"
+        android:layout_width="266dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/material_dynamic_primary30"
+        android:text="@string/btnMainBuyBook"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:cornerRadius="1dip"
+        app:layout_constraintBottom_toTopOf="@+id/btnMainMenuSellBook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.61" />
+
+    <Button
+        android:id="@+id/btnMainMenuProfile"
+        android:layout_width="266dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="448dp"
+        android:backgroundTint="@color/material_dynamic_primary30"
+        android:text="@string/btnMainProfile"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:cornerRadius="1dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.774" />
+
+    <Button
+        android:id="@+id/btnMainMenuOrder"
+        android:layout_width="266dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="316dp"
+        android:layout_marginBottom="13dp"
+        android:backgroundTint="@color/material_dynamic_primary30"
+        android:text="@string/btnMainOrder"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:cornerRadius="1dip"
+        app:layout_constraintBottom_toTopOf="@+id/btnMainMenuProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.628" />
+
+    <Button
+        android:id="@+id/btnMainMenuSellBook"
+        android:layout_width="266dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="192dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/material_dynamic_primary30"
+        android:text="@string/btnMainSellBook"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:cornerRadius="1dip"
+        app:layout_constraintBottom_toTopOf="@+id/btnMainMenuOrder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.631" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
