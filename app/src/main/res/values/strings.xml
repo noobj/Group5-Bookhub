@@ -21,4 +21,10 @@
     <string name="btnMainSellBook">Sell a Book</string>
     <string name="btnMainOrder">Order Details</string>
     <string name="btnMainProfile">User Profile</string>
+    <string name="imgUser">User profile image</string>
+    <string name="tvUserAddress">Address</string>
+    <string name="tvUserPhone">Phone</string>
+    <string name="tvUserEmail">Email</string>
+    <string name="btnEditProfile">Edit Profile</string>
+    <string name="btnLogout">Logout</string>
 </resources>
