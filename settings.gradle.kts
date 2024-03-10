@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Group5-BookHub"
+rootProject.name = "Group5BookHub"
 include(":app")
  

@@ -1,4 +1,4 @@
-package com.example.group5_bookhub;
+package com.example.group5bookhub;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class Register extends AppCompatActivity {
+
+public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +16,6 @@ public class Register extends AppCompatActivity {
 
         TextView textSignUp = findViewById(R.id.tvSignUp);
 
-        textSignUp.setOnClickListener(v -> startActivity(new Intent(Register.this, Login.class)));
+        textSignUp.setOnClickListener(v -> startActivity(new Intent(RegisterActivity.this, LoginActivity.class)));
     }
 }

@@ -1,4 +1,4 @@
-package com.example.group5_bookhub;
+package com.example.group5bookhub;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class Login extends AppCompatActivity {
+
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +17,6 @@ public class Login extends AppCompatActivity {
         TextView signUpText = findViewById(R.id.tvLoginSignUp);
 
         // Sign up click
-        signUpText.setOnClickListener(v -> startActivity(new Intent(Login.this, Register.class)));
+        signUpText.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
     }
 }

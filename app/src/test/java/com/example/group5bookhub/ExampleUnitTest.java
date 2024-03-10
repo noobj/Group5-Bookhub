@@ -1,4 +1,4 @@
-package com.example.group5_bookhub;
+package com.example.group5bookhub;
 
 import org.junit.Test;
 

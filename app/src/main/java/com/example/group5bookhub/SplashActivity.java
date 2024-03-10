@@ -1,4 +1,4 @@
-package com.example.group5_bookhub;
+package com.example.group5bookhub;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,7 @@ import android.os.Bundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Splash extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,7 @@ public class Splash extends AppCompatActivity {
             @Override
             public void run() {
                 finish();
-                startActivity(new Intent(Splash.this, Login.class));
+                startActivity(new Intent(SplashActivity.this, MainMenuActivity.class));
             }
         };
         Timer opening = new Timer();
