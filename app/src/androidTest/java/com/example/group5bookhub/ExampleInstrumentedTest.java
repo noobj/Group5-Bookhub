@@ -1,4 +1,4 @@
-package com.example.group5_bookhub;
+package com.example.group5bookhub;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.group5_bookhub", appContext.getPackageName());
+        assertEquals("com.example.group5bookhub", appContext.getPackageName());
     }
 }

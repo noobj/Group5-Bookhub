@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Group5-BookHub</string>
+    <string name="splashWelcome">Welcome to BookHub</string>
+    <string name="txtLogin">Login</string>
+    <string name="imgLogin">Login Image</string>
+    <string name="txtSignInToContinue">Please Sign in to continue</string>
+    <string name="txtLoginHint">Email</string>
+    <string name="txtPasswordHint">Password</string>
+    <string name="btnSignIn">Sign In</string>
+    <string name="tvAccountLogin">Don\'t have an account?</string>
+    <string name="tvLoginSignUp">Sign Up</string>
+    <string name="tvRegister">Register</string>
+    <string name="tvRegisterToLogin">Please register to login.</string>
+    <string name="txtName">Name</string>
+    <string name="txtAddress">Address</string>
+    <string name="txtPhone">Phone Number</string>
+    <string name="txtRePassword">Re-enter Password</string>
+    <string name="tvHaveAccount">Already have an account?</string>
+    <string name="tvBookHub">Book Hub</string>
+    <string name="btnMainBuyBook">Buy a Book</string>
+    <string name="btnMainSellBook">Sell a Book</string>
+    <string name="btnMainOrder">Order Details</string>
+    <string name="btnMainProfile">User Profile</string>
 </resources>
