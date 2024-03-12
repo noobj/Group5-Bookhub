@@ -27,4 +27,24 @@
     <string name="tvUserEmail">Email</string>
     <string name="btnEditProfile">Edit Profile</string>
     <string name="btnLogout">Logout</string>
+    <string name="title_activity_book_details">BookDetails</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="tabBuy">Buy</string>
+    <string name="tabSell">Sell</string>
+    <string name="tabOrder">Order</string>
+    <string name="tabProfile">Profile</string>
+    <string name="tvBookTitle">ABC Book</string>
+    <string name="imgBook">Book</string>
+    <string name="tvPrice">Price: </string>
+    <string name="tvDesc">Description:</string>
+    <string name="tvAuthor">Author:</string>
+    <string name="tvSeller">Seller:</string>
+    <string name="btnBuy">Buy</string>
+    <string name="btnLike">Like</string>
+    <string name="tvPriceSample">$20</string>
+    <string name="tvDescSample">A man is found on the street and taken to the hospital.</string>
+    <string name="tvSampleAuthor">John Doe</string>
+    <string name="tvSampleSeller">Aaron</string>
 </resources>

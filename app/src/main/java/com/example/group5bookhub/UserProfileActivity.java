@@ -1,12 +1,17 @@
 package com.example.group5bookhub;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -31,6 +36,33 @@ public class UserProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(UserProfileActivity.this,LoginActivity.class));
+            }
+        });
+
+        // Bottom navigation
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        bottomNavigationView.setSelectedItemId(R.id.profile);
+
+
+//      // Perform item selected listener
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int selectedId = menuItem.getItemId();
+
+                if (selectedId == R.id.buy) {
+                    // Handle "Buy" selection
+                    startActivity(new Intent(UserProfileActivity.this, BookDetailsActivity.class));
+                } else if (selectedId == R.id.sell) {
+                    // Handle "Sell" selection
+                } else if (selectedId == R.id.order) {
+                    // Handle "Order" selection
+                } else if (selectedId == R.id.profile) {
+                    // Handle profile selection
+                    startActivity(new Intent(UserProfileActivity.this, UserProfileActivity.class));
+                }
+                return true;
             }
         });
     }
