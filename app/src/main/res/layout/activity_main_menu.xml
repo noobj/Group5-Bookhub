@@ -31,6 +31,7 @@
         android:layout_marginBottom="12dp"
         android:backgroundTint="@color/text"
         android:text="@string/btnMainBuyBook"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         app:cornerRadius="1dip"
@@ -48,6 +49,7 @@
         android:layout_marginTop="448dp"
         android:backgroundTint="@color/text"
         android:text="@string/btnMainProfile"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         app:cornerRadius="1dip"
@@ -56,7 +58,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.774" />
+        app:layout_constraintVertical_bias="0.542" />
 
     <Button
         android:id="@+id/btnMainMenuOrder"
@@ -66,6 +68,7 @@
         android:layout_marginBottom="13dp"
         android:backgroundTint="@color/text"
         android:text="@string/btnMainOrder"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         app:cornerRadius="1dip"
@@ -84,6 +87,7 @@
         android:layout_marginBottom="12dp"
         android:backgroundTint="@color/text"
         android:text="@string/btnMainSellBook"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         app:cornerRadius="1dip"
