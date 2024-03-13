@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".SellBook">
+
+    <TextView
+        android:id="@+id/tvTitleSell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvTitleSell"
+        android:textColor="@color/text"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.09" />
+
+    <EditText
+        android:id="@+id/edTitle"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="@string/hintTitle"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textColorHint="@color/text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleSell"
+        app:layout_constraintVertical_bias="0.047" />
+
+    <EditText
+        android:id="@+id/edDescription"
+        android:layout_width="250dp"
+        android:layout_height="77dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/hintDescription"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:textColorHint="@color/text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleSell"
+        app:layout_constraintVertical_bias="0.182" />
+
+    <EditText
+        android:id="@+id/edPrice"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="@string/hintPrice"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:textColorHint="@color/text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleSell"
+        app:layout_constraintVertical_bias="0.346" />
+
+    <Spinner
+        android:id="@+id/spinnerCategory"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:entries="@array/groupCategory"
+        android:prompt="@string/hintCategory"
+        android:spinnerMode="dialog"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleSell"
+        app:layout_constraintVertical_bias="0.477" />
+
+    <Button
+        android:id="@+id/btnUploadImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/text"
+        android:text="@string/btnUploadImg"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.704" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="157dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.716"
+        tools:ignore="TextSizeCheck">
+
+        <RadioButton
+            android:id="@+id/rdForSale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="@string/rdForSale"
+            android:textColor="@color/text"
+            android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/rdShare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="@string/rdShare"
+            android:textColor="@color/text"
+            android:textSize="24sp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnAddBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/text"
+        android:text="@string/btnAddBook"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.846" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/text"
+        app:itemBackground="@color/text"
+        app:itemIconSize="26dp"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/bottom_nav_menu"></com.google.android.material.bottomnavigation.BottomNavigationView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

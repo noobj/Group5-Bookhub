@@ -47,4 +47,18 @@
     <string name="tvDescSample">A man is found on the street and taken to the hospital.</string>
     <string name="tvSampleAuthor">John Doe</string>
     <string name="tvSampleSeller">Aaron</string>
+    <string name="tvTitleSell">Sell a Book</string>
+    <string name="hintTitle">Title</string>
+    <string name="hintDescription">Description</string>
+    <string name="hintPrice">Price</string>
+    <string name="hintCategory">Select Category</string>
+    <string-array name="groupCategory">
+        <item>Fiction and Literature</item>
+        <item>Nonfiction</item>
+        <item>Kids</item>
+    </string-array>
+    <string name="btnUploadImg">Upload Image</string>
+    <string name="rdForSale">For Sale</string>
+    <string name="rdShare">Share</string>
+    <string name="btnAddBook">Add Book</string>
 </resources>
