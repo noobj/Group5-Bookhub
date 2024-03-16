@@ -61,13 +61,11 @@
     <string name="rdForSale">For Sale</string>
     <string name="rdShare">Share</string>
     <string name="btnAddBook">Add Book</string>
-<<<<<<< Updated upstream
     <string name="btnEditUser">Update</string>
     <string name="sampleUserNameHint">Gayali Methmini</string>
     <string name="sampleUserAddressHint">19022 119B Ave New West</string>
     <string name="sampleUserPhoneHint">6048489812</string>
     <string name="sampleUserEmailHint">gayali.9812@gmail.com</string>
-=======
     <string name="tvTitleDelivery">Delivery Details</string>
     <string name="btnOrder">Order</string>
     <string name="btnCancel">Cancel</string>
@@ -76,5 +74,4 @@
     <string name="tvBookBought">Books Bought</string>
     <string name="tvStatus">Status</string>
     <string name="tvBookSold">Books Sold</string>
->>>>>>> Stashed changes
 </resources>
