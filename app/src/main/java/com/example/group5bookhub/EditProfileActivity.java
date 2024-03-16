@@ -54,6 +54,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     startActivity(new Intent(EditProfileActivity.this, SellBookActivity.class));
                 } else if (selectedId == R.id.order) {
                     // Handle "Order" selection
+                    startActivity(new Intent(EditProfileActivity.this, OrderHistoryActivity.class));
                 } else if (selectedId == R.id.profile) {
                     // Handle profile selection
                     startActivity(new Intent(EditProfileActivity.this, UserProfileActivity.class));
