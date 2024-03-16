@@ -8,41 +8,29 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class UserProfileActivity extends AppCompatActivity {
+public class EditProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.activity_edit_profile);
 
-        TextView userName = findViewById(R.id.tvUserName);
-        TextView userAddress = findViewById(R.id.tvUaddress);
-        TextView userPhone = findViewById(R.id.tvUphone);
-        TextView userEmail = findViewById(R.id.tvUemail);
-        Button editProfile = findViewById(R.id.btnEditProfile);
-        Button logout = findViewById(R.id.btnLogout);
+        EditText edTxtUserName = findViewById(R.id.edTxtUserName);
+        EditText edTxtUserAddress = findViewById(R.id.edTxtUserAddress);
+        EditText edTxtUserPhone = findViewById(R.id.edTxtUserPhone);
+        EditText edTxtUserEmail = findViewById(R.id.edTxtUserEmail);
+        Button btnUpdate = findViewById(R.id.btnUserUpdate);
 
-        userName.setText("Gayali Methmini");
-        userAddress.setText("19022 119B Ave New West");
-        userPhone.setText("6048489812");
-        userEmail.setText("gayali.9812@gmail.com");
-
-        editProfile.setOnClickListener(new View.OnClickListener() {
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserProfileActivity.this,EditProfileActivity.class));
-            }
-        });
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(UserProfileActivity.this,LoginActivity.class));
+                Toast.makeText(EditProfileActivity.this, "Successfully Updated", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -60,15 +48,15 @@ public class UserProfileActivity extends AppCompatActivity {
 
                 if (selectedId == R.id.buy) {
                     // Handle "Buy" selection
-                    startActivity(new Intent(UserProfileActivity.this, BookDetailsActivity.class));
+                    startActivity(new Intent(EditProfileActivity.this, BookDetailsActivity.class));
                 } else if (selectedId == R.id.sell) {
                     // Handle "Sell" selection
-                    startActivity(new Intent(UserProfileActivity.this, SellBookActivity.class));
+                    startActivity(new Intent(EditProfileActivity.this, SellBookActivity.class));
                 } else if (selectedId == R.id.order) {
                     // Handle "Order" selection
                 } else if (selectedId == R.id.profile) {
                     // Handle profile selection
-                    startActivity(new Intent(UserProfileActivity.this, UserProfileActivity.class));
+                    startActivity(new Intent(EditProfileActivity.this, UserProfileActivity.class));
                 }
                 return true;
             }
