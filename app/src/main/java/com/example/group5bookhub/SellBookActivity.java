@@ -38,12 +38,12 @@ public class SellBookActivity extends AppCompatActivity {
 
                 if (selectedId == R.id.buy) {
                     // Handle "Buy" selection
-                    startActivity(new Intent(SellBookActivity.this, BookDetailsActivity.class));
+                    startActivity(new Intent(SellBookActivity.this, BuyBookActivity.class));
                 } else if (selectedId == R.id.sell) {
                     // Handle "Sell" selection
-                    startActivity(new Intent(SellBookActivity.this, SellBookActivity.class));
                 } else if (selectedId == R.id.order) {
                     // Handle "Order" selection
+                    startActivity(new Intent(SellBookActivity.this, OrderHistoryActivity.class));
                 } else if (selectedId == R.id.profile) {
                     // Handle profile selection
                     startActivity(new Intent(SellBookActivity.this, UserProfileActivity.class));
