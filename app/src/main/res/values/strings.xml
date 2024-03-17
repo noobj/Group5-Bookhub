@@ -74,4 +74,9 @@
     <string name="tvBookBought">Books Bought</string>
     <string name="tvStatus">Status</string>
     <string name="tvBookSold">Books Sold</string>
+    <string name="btnEditOrdHis">Edit</string>
+    <string name="tvOrdHisStatus">Status :</string>
+    <string name="tvOrdHisAddress">Address :</string>
+    <string name="tvOrdHisDate">Date :</string>
+    <string name="tvOrdHisPrice">Price :</string>
 </resources>

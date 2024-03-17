@@ -13,36 +13,32 @@ import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class UserProfileActivity extends AppCompatActivity {
+import org.w3c.dom.Text;
+
+public class OrderHistoryDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.activity_order_history_details);
 
-        TextView userName = findViewById(R.id.tvUserName);
-        TextView userAddress = findViewById(R.id.tvUaddress);
-        TextView userPhone = findViewById(R.id.tvUphone);
-        TextView userEmail = findViewById(R.id.tvUemail);
-        Button editProfile = findViewById(R.id.btnEditProfile);
-        Button logout = findViewById(R.id.btnLogout);
+        TextView orderBookName = findViewById(R.id.tvOrdHisBookName);
+        TextView orderStatus = findViewById(R.id.tvOrHiStatus);
+        TextView orderAddress = findViewById(R.id.tvOrHiAddress);
+        TextView orderDate = findViewById(R.id.tvOrHiDate);
+        TextView orderPrice = findViewById(R.id.tvOrHiPrice);
+        Button editButton = findViewById(R.id.btnEditOrdHis);
 
-        userName.setText("Gayali Methmini");
-        userAddress.setText("19022 119B Ave New West");
-        userPhone.setText("6048489812");
-        userEmail.setText("gayali.9812@gmail.com");
+        orderBookName.setText("Don't Look Back");
+        orderStatus.setText("In Transit");
+        orderAddress.setText("28055 150 Blakely Avenue New Westminister");
+        orderDate.setText("29/01/2024");
+        orderPrice.setText("$40");
 
-        editProfile.setOnClickListener(new View.OnClickListener() {
+        editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserProfileActivity.this,EditProfileActivity.class));
-            }
-        });
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(UserProfileActivity.this,OrderHistoryDetailsActivity.class));
             }
         });
 
@@ -60,16 +56,16 @@ public class UserProfileActivity extends AppCompatActivity {
 
                 if (selectedId == R.id.buy) {
                     // Handle "Buy" selection
-                    startActivity(new Intent(UserProfileActivity.this, BuyBookActivity.class));
+                    startActivity(new Intent(OrderHistoryDetailsActivity.this, BuyBookActivity.class));
                 } else if (selectedId == R.id.sell) {
                     // Handle "Sell" selection
-                    startActivity(new Intent(UserProfileActivity.this, SellBookActivity.class));
+                    startActivity(new Intent(OrderHistoryDetailsActivity.this, SellBookActivity.class));
                 } else if (selectedId == R.id.order) {
                     // Handle "Order" selection
-                    startActivity(new Intent(UserProfileActivity.this, OrderHistoryActivity.class));
+                    startActivity(new Intent(OrderHistoryDetailsActivity.this, OrderHistoryActivity.class));
                 } else if (selectedId == R.id.profile) {
                     // Handle profile selection
-                    startActivity(new Intent(UserProfileActivity.this, UserProfileActivity.class));
+                    startActivity(new Intent(OrderHistoryDetailsActivity.this, UserProfileActivity.class));
                 }
                 return true;
             }
