@@ -38,7 +38,7 @@ public class OrderHistoryDetailsActivity extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(OrderHistoryDetailsActivity.this,EditOrderDetailsBuyerActivity.class));
             }
         });
 

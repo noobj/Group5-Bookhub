@@ -23,7 +23,7 @@
         tools:ignore="TextSizeCheck" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/imgVbook"
         android:layout_width="124dp"
         android:layout_height="129dp"
         android:contentDescription="@string/image"
