@@ -60,10 +60,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    public Cursor getUserByName(String username){
+    public Cursor getUserByEmail(String email){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE1_NAME + " WHERE Username = " + username;
-        Cursor c = sqLiteDatabase.rawQuery(query,null);
+        // Enclose email value in single quotes
+        String query = "SELECT * FROM " + TABLE1_NAME + " WHERE Email='" + email + "'";
+        Cursor c = sqLiteDatabase.rawQuery(query, null);
         return c;
     }
 
