@@ -42,7 +42,7 @@ public class UserProfileActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserProfileActivity.this,OrderHistoryDetailsActivity.class));
+                startActivity(new Intent(UserProfileActivity.this,LoginActivity.class));
             }
         });
 
