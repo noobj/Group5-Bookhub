@@ -25,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText address = findViewById(R.id.edTextAddress);
         EditText email = findViewById(R.id.editTextEmailAddress);
         EditText password = findViewById(R.id.editTextPassword);
+        EditText confirmPassword = findViewById(R.id.editTextPasswordReEnter);
 
 
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
@@ -32,16 +33,33 @@ public class RegisterActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean inserted = databaseHelper.insertUser(username.getText().toString(),
-                        password.getText().toString(),email.getText().toString(),
-                        address.getText().toString());
-                if(inserted){
-                    Toast.makeText(RegisterActivity.this,"User is inserted ",
-                            Toast.LENGTH_LONG).show();
+                String name = username.getText().toString().trim();
+                String addr = address.getText().toString().trim();
+                String mail = email.getText().toString().trim();
+                String pass = password.getText().toString().trim();
+                String confirmPass = confirmPassword.getText().toString().trim();
+
+                // Check if any field is empty
+                if (name.isEmpty() || addr.isEmpty() || mail.isEmpty() || pass.isEmpty() || confirmPass.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-                else{
-                    Toast.makeText(RegisterActivity.this,"User is not inserted ",
-                            Toast.LENGTH_LONG).show();
+
+                // Check if passwords match
+                if (!pass.equals(confirmPass)) {
+                    Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Insert the user into the database
+                boolean inserted = databaseHelper.insertUser(name, pass, mail, addr);
+                if (inserted) {
+                    Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                    // Redirect to BuyBookActivity
+                    startActivity(new Intent(RegisterActivity.this, BuyBookActivity.class));
+                    finish(); // Close this activity
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Error registering user", Toast.LENGTH_SHORT).show();
                 }
             }
         });

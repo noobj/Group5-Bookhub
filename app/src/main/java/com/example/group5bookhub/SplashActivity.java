@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 finish();
-                startActivity(new Intent(SplashActivity.this, BuyBookActivity.class));
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
             }
         };
         Timer opening = new Timer();
