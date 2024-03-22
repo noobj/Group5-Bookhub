@@ -52,11 +52,7 @@
     <string name="hintDescription">Description</string>
     <string name="hintPrice">Price</string>
     <string name="hintCategory">Select Category</string>
-    <string-array name="groupCategory">
-        <item>Fiction and Literature</item>
-        <item>Nonfiction</item>
-        <item>Kids</item>
-    </string-array>
+    <string name="hintAuthor">Author</string>
     <string name="btnUploadImg">Upload Image</string>
     <string name="rdForSale">For Sale</string>
     <string name="rdShare">Share</string>
