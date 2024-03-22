@@ -73,41 +73,29 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTitleSell"
         app:layout_constraintVertical_bias="0.346" />
 
-    <Spinner
-        android:id="@+id/spinnerCategory"
+    <EditText
+        android:id="@+id/edAuthor"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:entries="@array/groupCategory"
-        android:prompt="@string/hintCategory"
-        android:spinnerMode="dialog"
+        android:ems="10"
+        android:hint="@string/hintAuthor"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textColorHint="@color/text"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitleSell"
-        app:layout_constraintVertical_bias="0.477" />
-
-    <Button
-        android:id="@+id/btnUploadImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/text"
-        android:text="@string/btnUploadImg"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.067"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.704" />
+        app:layout_constraintVertical_bias="0.473" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="157dp"
-        android:layout_height="wrap_content"
+        android:layout_width="161dp"
+        android:layout_height="91dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.937"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.716"
@@ -117,7 +105,7 @@
             android:id="@+id/rdForSale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
+            android:minHeight="50dp"
             android:text="@string/rdForSale"
             android:textColor="@color/text"
             android:textSize="24sp" />
@@ -126,10 +114,11 @@
             android:id="@+id/rdShare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
+            android:minHeight="50dp"
             android:text="@string/rdShare"
             android:textColor="@color/text"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            tools:ignore="TouchTargetSizeCheck" />
     </RadioGroup>
 
     <Button
