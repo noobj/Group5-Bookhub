@@ -29,6 +29,10 @@ public class LoginActivity extends AppCompatActivity {
         btnSignIn = findViewById(R.id.btnSignIn);
         TextView signUpBtn = findViewById(R.id.tvLoginSignUp);
 
+        // Shared Pref
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = edTextEmail.getText().toString().trim();
                 String password = edTextPassword.getText().toString().trim();
 
+                // Verify email and password is entered
                 if (email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Please enter email and password", Toast.LENGTH_SHORT).show();
                     return;
@@ -50,11 +55,22 @@ public class LoginActivity extends AppCompatActivity {
                 Cursor cursor = dbHelper.getUserByEmail(email);
 
                 if (cursor != null) {
+                    // Retrieve the password from cursor
                     int passwordIndex = cursor.getColumnIndex(DatabaseHelper.T1COL3);
                     if (passwordIndex != -1 && cursor.moveToFirst()) {
                         String dbPassword = cursor.getString(passwordIndex);
 
                         if (password.equals(dbPassword)) {
+
+                            // Retrieve user ID from cursor
+                            int userIdIndex = cursor.getColumnIndex(DatabaseHelper.T1COL1);
+                            if (userIdIndex != -1) {
+                                int userId = cursor.getInt(userIdIndex);
+
+                                // Store user ID in SharedPreferences
+                                editor.putInt("userId", userId);
+                                editor.apply();
+                            }
                             // Passwords match, login successful
                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, BuyBookActivity.class));
