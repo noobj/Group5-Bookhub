@@ -1,6 +1,7 @@
 package com.example.group5bookhub;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -73,6 +74,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (cursor != null) {
                     cursor.close();
                 }
+
+
             }
         });
     }
