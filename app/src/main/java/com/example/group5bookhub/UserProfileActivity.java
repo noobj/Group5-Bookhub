@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class UserProfileActivity extends AppCompatActivity {
 
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,9 @@ public class UserProfileActivity extends AppCompatActivity {
         userPhone.setText("6048489812");
         userEmail.setText("gayali.9812@gmail.com");
 
+        // Initialize SharedPreferences
+        sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,10 +44,18 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
+        // Logout clicked
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserProfileActivity.this,LoginActivity.class));
+                // Delete user ID from SharedPreferences
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove("userId");
+                editor.apply();
+
+                // Redirect to LoginActivity
+                startActivity(new Intent(UserProfileActivity.this, LoginActivity.class));
+                finish(); // Close this activity
             }
         });
 

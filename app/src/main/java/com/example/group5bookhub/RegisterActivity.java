@@ -3,6 +3,7 @@ package com.example.group5bookhub;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -27,8 +28,12 @@ public class RegisterActivity extends AppCompatActivity {
         EditText password = findViewById(R.id.editTextPassword);
         EditText confirmPassword = findViewById(R.id.editTextPasswordReEnter);
 
-
+        // Database helper
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
+
+        // Inside onCreate method
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +59,28 @@ public class RegisterActivity extends AppCompatActivity {
                 // Insert the user into the database
                 boolean inserted = databaseHelper.insertUser(name, pass, mail, addr);
                 if (inserted) {
+                    // Retrieve user ID after successful registration
+                    Cursor cursor = databaseHelper.getUserByEmail(mail);
+
+                    // Check if user exists in the User table
+                    if (cursor != null && cursor.moveToFirst()) {
+                        // Check if the user ID column exists in the cursor
+                        int userIdIndex = cursor.getColumnIndex(DatabaseHelper.T1COL1);
+                        if (userIdIndex != -1) {
+                            // User ID column exists, retrieve user ID
+                            int userId = cursor.getInt(userIdIndex);
+
+                            // Store user ID in SharedPreferences
+                            editor.putInt("userId", userId);
+                            editor.apply();
+                        }
+                    }
+
+                    // Close the cursor
+                    if (cursor != null) {
+                        cursor.close();
+                    }
+
                     Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
                     // Redirect to BuyBookActivity
                     startActivity(new Intent(RegisterActivity.this, BuyBookActivity.class));
