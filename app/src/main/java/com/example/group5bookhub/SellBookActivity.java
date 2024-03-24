@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,12 +21,13 @@ public class SellBookActivity extends AppCompatActivity {
 
     EditText titleBook;
     EditText description;
-    EditText price;
+    EditText priceBook;
     EditText authorBook;
     RadioButton sellBook;
     RadioButton shareBook;
     Button addBtn;
     DatabaseHelper databaseHelper;
+    int sellerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +36,13 @@ public class SellBookActivity extends AppCompatActivity {
 
         titleBook = findViewById(R.id.edTitle);
         description = findViewById(R.id.edDescription);
-        price = findViewById(R.id.edPrice);
+        priceBook = findViewById(R.id.edPrice);
         authorBook = findViewById(R.id.edAuthor);
         sellBook = findViewById(R.id.rdForSale);
         shareBook = findViewById(R.id.rdShare);
         addBtn = findViewById(R.id.btnAddBook);
         databaseHelper = new DatabaseHelper(this);
+
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +50,7 @@ public class SellBookActivity extends AppCompatActivity {
                 String title = titleBook.getText().toString().trim();
                 String des = description.getText().toString().trim();
                 String author = authorBook.getText().toString().trim();
-                String priceStr = price.getText().toString().trim();
+                String priceStr = priceBook.getText().toString().trim();
                 boolean isForSale = sellBook.isChecked();
 
                 //check for empty fields
@@ -57,12 +60,20 @@ public class SellBookActivity extends AppCompatActivity {
                 }
 
                 float price = Float.parseFloat(priceStr);
-                int sellerId = 1;
+
+                //Retrieve userId from SharedPreferences
+                SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+                //set default value when userId not found
+                sellerId = sharedPreferences.getInt("userId", -1);
 
                 boolean isInserted = databaseHelper.insertBook(title, author, des, price, isForSale, sellerId);
 
                 if (isInserted) {
                     Toast.makeText(SellBookActivity.this, "Book added successfully", Toast.LENGTH_LONG).show();
+                    titleBook.setText("");
+                    description.setText("");
+                    priceBook.setText("");
+                    authorBook.setText("");
                 }
                 else {
                     Toast.makeText(SellBookActivity.this, "Failed to add book", Toast.LENGTH_LONG).show();

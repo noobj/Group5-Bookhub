@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,63 +19,46 @@ import java.util.ArrayList;
 
 public class BuyBookActivity extends AppCompatActivity {
 
+    DatabaseHelper databaseHelper;
+    ListView ls;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy_book);
 
-        String[] books = {"Book1", "Book2", "Book3", "Book4", "Book5", "Book6", "Book7", "Book8", "Book9", "Book10"};
-        ListView ls = findViewById(R.id.lsBuyBook);
+        databaseHelper = new DatabaseHelper(this);
+        ls = findViewById(R.id.lsBuyBook);
 
+        //Fetch book titles from database
+        ArrayList<String> bookTitles = new ArrayList<>();
+        Cursor cursor = databaseHelper.getBooks();
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int index = cursor.getColumnIndex(DatabaseHelper.BOOK_TITLE);
+                String title = cursor.getString(index);
+                bookTitles.add(title);
+            }
+            while (cursor.moveToNext());
+            cursor.close();
+        }
+
+        // Create ArrayList of ImageAndText objects
         ArrayList<ImageAndText> objList = new ArrayList<>();
-        objList.add(new ImageAndText("Book1", R.drawable.bookcover1));
-        objList.add(new ImageAndText("Book2", R.drawable.bookcover2));
-        objList.add(new ImageAndText("Book3", R.drawable.bookcover3));
-        objList.add(new ImageAndText("Book4", R.drawable.bookcover4));
-        objList.add(new ImageAndText("Book5", R.drawable.bookcover5));
-        objList.add(new ImageAndText("Book6", R.drawable.bookcover1));
-        objList.add(new ImageAndText("Book7", R.drawable.bookcover2));
-        objList.add(new ImageAndText("Book8", R.drawable.bookcover3));
-        objList.add(new ImageAndText("Book9", R.drawable.bookcover4));
-        objList.add(new ImageAndText("Book10", R.drawable.bookcover5));
+        // Create book cover
+        int[] bookCovers = {R.drawable.bookcover1, R.drawable.bookcover2, R.drawable.bookcover3, R.drawable.bookcover4, R.drawable.bookcover5};
+
+        // Populate objList with book titles and covers
+        for (int i = 0; i < bookTitles.size(); i++) {
+            objList.add(new ImageAndText(bookTitles.get(i), bookCovers[i % bookCovers.length]));
+        }
 
         ListAdapter adapter = new CustomAdapterBuy(this, objList);
         ls.setAdapter(adapter);
         ls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        startActivity(new Intent(BuyBookActivity.this, BookDetailsActivity.class));
-                        break;
-                    case 1:
-                        startActivity(new Intent(BuyBookActivity.this, BookDetailsActivity.class));
-                        break;
-                    case 2:
-                        startActivity(new Intent(BuyBookActivity.this, BookDetailsActivity.class));
-                        break;
-                    case 3:
-                        startActivity(new Intent(BuyBookActivity.this, BookDetailsActivity.class));
-                        break;
-                    case 4:
-                        startActivity(new Intent(BuyBookActivity.this, BookDetailsActivity.class));
-                        break;
-                    case 5:
-                        startActivity(new Intent(BuyBookActivity.this, BookDetailsActivity.class));
-                        break;
-                    case 6:
-                        startActivity(new Intent(BuyBookActivity.this, BookDetailsActivity.class));
-                        break;
-                    case 7:
-                        startActivity(new Intent(BuyBookActivity.this, BookDetailsActivity.class));
-                        break;
-                    case 8:
-                        startActivity(new Intent(BuyBookActivity.this, BookDetailsActivity.class));
-                        break;
-                    case 9:
-                        startActivity(new Intent(BuyBookActivity.this, BookDetailsActivity.class));
-                        break;
-                }
+                startActivity(new Intent(BuyBookActivity.this, BookDetailsActivity.class));
             }
         });
 
