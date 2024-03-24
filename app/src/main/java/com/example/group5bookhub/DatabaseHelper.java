@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     final static String DATABASE_NAME ="Bookhub.db";
-    final static int DATABASE_VERSION = 2;
+    final static int DATABASE_VERSION = 3;
     final static String TABLE1_NAME = "User";
     final static String T1COL1 = "ID";
     final static String T1COL2 = "Username";
