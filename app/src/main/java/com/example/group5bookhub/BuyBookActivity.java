@@ -32,12 +32,15 @@ public class BuyBookActivity extends AppCompatActivity {
 
         //Fetch book titles from database
         ArrayList<String> bookTitles = new ArrayList<>();
+        ArrayList<String> bookImages = new ArrayList<>();
         Cursor cursor = databaseHelper.getBooks();
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 int index = cursor.getColumnIndex(DatabaseHelper.BOOK_TITLE);
                 String title = cursor.getString(index);
                 bookTitles.add(title);
+                index = cursor.getColumnIndex(DatabaseHelper.BOOK_IMAGE);
+                bookImages.add(cursor.getString(index));
             }
             while (cursor.moveToNext());
             cursor.close();
@@ -50,7 +53,8 @@ public class BuyBookActivity extends AppCompatActivity {
 
         // Populate objList with book titles and covers
         for (int i = 0; i < bookTitles.size(); i++) {
-            objList.add(new ImageAndText(bookTitles.get(i), bookCovers[i % bookCovers.length]));
+            int imageResource = getResources().getIdentifier(bookImages.get(i) , "drawable", getPackageName());
+            objList.add(new ImageAndText(bookTitles.get(i), imageResource));
         }
 
         ListAdapter adapter = new CustomAdapterBuy(this, objList);
