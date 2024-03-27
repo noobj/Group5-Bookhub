@@ -42,7 +42,7 @@
     <string name="tvAuthor">Author:</string>
     <string name="tvSeller">Seller:</string>
     <string name="btnBuy">Buy</string>
-    <string name="btnLike">Like</string>
+    <string name="btnBack">Back</string>
     <string name="tvPriceSample">$20</string>
     <string name="tvDescSample">A man is found on the street and taken to the hospital.</string>
     <string name="tvSampleAuthor">John Doe</string>
