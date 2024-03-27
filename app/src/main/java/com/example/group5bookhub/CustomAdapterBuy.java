@@ -13,8 +13,14 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 
 public class CustomAdapterBuy extends ArrayAdapter<ImageAndText> {
+    private Context context;
+    private ArrayList<ImageAndText> objList;
+    private ArrayList<ImageAndText> objListFull; // Full list to restore when search query is empty
     public CustomAdapterBuy(Context context, ArrayList<ImageAndText> objList) {
         super(context, R.layout.listview_layout, objList);
+        this.context = context;
+        this.objList = objList;
+        this.objListFull = new ArrayList<>(objList); // Make a copy of the original list
     }
 
     public View getView(int position, View converView, ViewGroup parent) {
@@ -28,4 +34,19 @@ public class CustomAdapterBuy extends ArrayAdapter<ImageAndText> {
         textView.setText(itemText);
         return customView;
     }
+
+    // Filter method to filter the list based on search query
+    public void filterList(ArrayList<ImageAndText> filteredList) {
+        objList.clear();
+        objList.addAll(filteredList);
+        notifyDataSetChanged();
+    }
+
+    // Method to restore the full list when search query is empty
+    public void restoreFullList() {
+        objList.clear();
+        objList.addAll(objListFull);
+        notifyDataSetChanged();
+    }
+
 }

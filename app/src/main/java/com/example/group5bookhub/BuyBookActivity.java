@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,7 +23,12 @@ public class BuyBookActivity extends AppCompatActivity {
 
     DatabaseHelper databaseHelper;
     ListView ls;
-    ListAdapter adapter;
+//    ListAdapter adapter;
+    ArrayList<String> bookTitles;
+    ArrayList<String> bookImages;
+    ArrayList<Integer> bookIds;
+    CustomAdapterBuy customAdapter;
+    ArrayList<ImageAndText> objList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,29 +37,19 @@ public class BuyBookActivity extends AppCompatActivity {
 
         databaseHelper = new DatabaseHelper(this);
         ls = findViewById(R.id.lsBuyBook);
+        SearchView searchView = findViewById(R.id.searchView);
 
-        //Fetch book titles from database
-        ArrayList<String> bookTitles = new ArrayList<>();
-        ArrayList<String> bookImages = new ArrayList<>();
-        ArrayList<Integer> bookIds = new ArrayList<>();
-        Cursor cursor = databaseHelper.getBooks();
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                int index = cursor.getColumnIndex(DatabaseHelper.BOOK_TITLE);
-                String title = cursor.getString(index);
-                bookTitles.add(title);
-                index = cursor.getColumnIndex(DatabaseHelper.BOOK_IMAGE);
-                bookImages.add(cursor.getString(index));
-                int indexId = cursor.getColumnIndex(DatabaseHelper.BOOK_ID);
-                int id = cursor.getInt(indexId);
-                bookIds.add(id);
-            }
-            while (cursor.moveToNext());
-            cursor.close();
-        }
+        //Initialize Arrays to store book titles, images and IDs
+        bookTitles = new ArrayList<>();
+        bookImages = new ArrayList<>();
+        bookIds = new ArrayList<>();
+
+        // Fetch all book titles, images, and ids from the database
+        fetchBooks();
+
 
         // Create ArrayList of ImageAndText objects
-        ArrayList<ImageAndText> objList = new ArrayList<>();
+        objList = new ArrayList<>();
 
         // Populate objList with book titles and covers
         for (int i = 0; i < bookTitles.size(); i++) {
@@ -61,8 +57,8 @@ public class BuyBookActivity extends AppCompatActivity {
             objList.add(new ImageAndText(bookTitles.get(i), imageResource));
         }
 
-        adapter = new CustomAdapterBuy(this, objList);
-        ls.setAdapter(adapter);
+        customAdapter = new CustomAdapterBuy(this, objList);
+        ls.setAdapter(customAdapter);
         ls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -72,10 +68,35 @@ public class BuyBookActivity extends AppCompatActivity {
             }
         });
 
+        // Search functionality
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return false;
+            }
+        });
+
+        // Restore full list when search query is empty
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                customAdapter.restoreFullList();
+                return false;
+            }
+        });
+
+
+
         // Bottom navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-//         Perform item reselected listener
+//        // Perform item reselected listener
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -99,4 +120,38 @@ public class BuyBookActivity extends AppCompatActivity {
         });
 
     }
+
+    private void fetchBooks(){
+        Cursor cursor = databaseHelper.getBooks();
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int index = cursor.getColumnIndex(DatabaseHelper.BOOK_TITLE);
+                String title = cursor.getString(index);
+                bookTitles.add(title);
+                index = cursor.getColumnIndex(DatabaseHelper.BOOK_IMAGE);
+                bookImages.add(cursor.getString(index));
+                int indexId = cursor.getColumnIndex(DatabaseHelper.BOOK_ID);
+                int id = cursor.getInt(indexId);
+                bookIds.add(id);
+            }
+            while (cursor.moveToNext());
+            cursor.close();
+        }
+    }
+
+    private void filter(String query) {
+        ArrayList<ImageAndText> filteredList = new ArrayList<>();
+        if (!TextUtils.isEmpty(query)) {
+            for (ImageAndText item : objList) {
+                if (item.getTxt().toLowerCase().contains(query.toLowerCase())) {
+                    filteredList.add(item);
+                }
+            }
+        } else {
+            filteredList.addAll(objList);
+        }
+        customAdapter.filterList(filteredList);
+    }
+
+
 }
