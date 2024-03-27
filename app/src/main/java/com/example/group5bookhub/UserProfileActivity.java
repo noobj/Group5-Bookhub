@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -17,30 +19,63 @@ import com.google.android.material.navigation.NavigationBarView;
 public class UserProfileActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
+    DatabaseHelper databaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        TextView userName = findViewById(R.id.tvUserName);
-        TextView userAddress = findViewById(R.id.tvUaddress);
-        TextView userPhone = findViewById(R.id.tvUphone);
-        TextView userEmail = findViewById(R.id.tvUemail);
+        TextView name = findViewById(R.id.tvUserName);
+        TextView address = findViewById(R.id.tvUaddress);
+        TextView email = findViewById(R.id.tvUemail);
         Button editProfile = findViewById(R.id.btnEditProfile);
         Button logout = findViewById(R.id.btnLogout);
 
-        userName.setText("Gayali Methmini");
-        userAddress.setText("19022 119B Ave New West");
-        userPhone.setText("6048489812");
-        userEmail.setText("gayali.9812@gmail.com");
-
-        // Initialize SharedPreferences
+        //Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
 
+        //Initialize database helper
+        databaseHelper = new DatabaseHelper(this);
+
+        //get the user ID of the logged-in user from SharedPreferences
+        int userId = sharedPreferences.getInt("userId", -1);
+
+        //Check if a valid user ID is retrieved
+        if (userId != -1) {
+            //Get user details from the database using the user ID
+            Cursor cursor = databaseHelper.getUserById(userId);
+
+            //Check if the cursor has data
+            if (cursor != null && cursor.moveToFirst()) {
+                //get user details from the cursor
+                int index = cursor.getColumnIndex(DatabaseHelper.T1COL2);
+                String userName = cursor.getString(index);
+                index = cursor.getColumnIndex(DatabaseHelper.T1COL5);
+                String userAddress = cursor.getString(index);
+                index = cursor.getColumnIndex(DatabaseHelper.T1COL4);
+                String userEmail = cursor.getString(index);
+
+                //Display user details in the activity
+                name.setText(userName);
+                address.setText(userAddress);
+                email.setText(userEmail);
+
+                // Close the cursor after use
+                cursor.close();
+            } else {
+                //where user details are not found
+                Toast.makeText(this, "User details not found", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            //where user ID is not found in the SharedPreferences
+            Toast.makeText(this, "User ID not found", Toast.LENGTH_LONG).show();
+        }
+        //edit profile button click
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserProfileActivity.this,EditProfileActivity.class));
+                startActivity(new Intent(UserProfileActivity.this, EditProfileActivity.class));
             }
         });
 
@@ -87,5 +122,6 @@ public class UserProfileActivity extends AppCompatActivity {
                 return true;
             }
         });
+
     }
 }
