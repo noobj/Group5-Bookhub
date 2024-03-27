@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -21,6 +22,7 @@ public class BuyBookActivity extends AppCompatActivity {
 
     DatabaseHelper databaseHelper;
     ListView ls;
+    ListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class BuyBookActivity extends AppCompatActivity {
         //Fetch book titles from database
         ArrayList<String> bookTitles = new ArrayList<>();
         ArrayList<String> bookImages = new ArrayList<>();
+        ArrayList<Integer> bookIds = new ArrayList<>();
         Cursor cursor = databaseHelper.getBooks();
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -41,6 +44,9 @@ public class BuyBookActivity extends AppCompatActivity {
                 bookTitles.add(title);
                 index = cursor.getColumnIndex(DatabaseHelper.BOOK_IMAGE);
                 bookImages.add(cursor.getString(index));
+                int indexId = cursor.getColumnIndex(DatabaseHelper.BOOK_ID);
+                int id = cursor.getInt(indexId);
+                bookIds.add(id);
             }
             while (cursor.moveToNext());
             cursor.close();
@@ -48,8 +54,6 @@ public class BuyBookActivity extends AppCompatActivity {
 
         // Create ArrayList of ImageAndText objects
         ArrayList<ImageAndText> objList = new ArrayList<>();
-        // Create book cover
-        int[] bookCovers = {R.drawable.bookcover1, R.drawable.bookcover2, R.drawable.bookcover3, R.drawable.bookcover4, R.drawable.bookcover5};
 
         // Populate objList with book titles and covers
         for (int i = 0; i < bookTitles.size(); i++) {
@@ -57,12 +61,14 @@ public class BuyBookActivity extends AppCompatActivity {
             objList.add(new ImageAndText(bookTitles.get(i), imageResource));
         }
 
-        ListAdapter adapter = new CustomAdapterBuy(this, objList);
+        adapter = new CustomAdapterBuy(this, objList);
         ls.setAdapter(adapter);
         ls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(BuyBookActivity.this, BookDetailsActivity.class));
+                Intent intent = new Intent(BuyBookActivity.this, BookDetailsActivity.class);
+                intent.putExtra("BOOK_ID", bookIds.get(position));
+                startActivity(intent);
             }
         });
 

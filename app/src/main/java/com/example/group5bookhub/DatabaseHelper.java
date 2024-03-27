@@ -197,4 +197,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_BOOK + " WHERE SellerId='" + sellerId + "'";
         return sqLiteDatabase.rawQuery(query, null);
     }
+
+    public Cursor getBookById(int bookId) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_BOOK + " WHERE " + BOOK_ID + "=?";
+        return sqLiteDatabase.rawQuery(query, new String[]{String.valueOf(bookId)});
+    }
+
 }

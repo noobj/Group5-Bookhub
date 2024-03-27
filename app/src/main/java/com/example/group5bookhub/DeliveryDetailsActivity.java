@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -15,17 +18,47 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class DeliveryDetailsActivity extends AppCompatActivity {
 
+    EditText address;
+    Button order;
+    Button cancel;
+    int bookId;
+    int buyerId;
+    int sellerId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery_details);
 
-        Button order = findViewById(R.id.btnOrder);
-        Button cancel = findViewById(R.id.btnCancel);
+        address = findViewById(R.id.edTextAddress);
+        order = findViewById(R.id.btnOrder);
+        cancel = findViewById(R.id.btnCancel);
+
+//        //Retrieve userId from SharedPreferences
+//        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+//        //set default value when userId not found
+//        buyerId = sharedPreferences.getInt("userId", -1);
+//
+//        //Receive data from intent
+//        Intent intent = getIntent();
+//        if (intent != null) {
+//            //Retrieve bookId from intent
+//            bookId = intent.getIntExtra("BOOK_ID", -1);
+//
+//            //Retrieve book details from database using bookId
+//            DatabaseHelper databaseHelper = new DatabaseHelper(this);
+//            Cursor cursor = databaseHelper.getBookById(bookId);
+//            if (cursor != null && cursor.moveToFirst()) {
+//                int index = cursor.getColumnIndex(DatabaseHelper.BOOK_SELLER);
+//                sellerId = cursor.getInt(index);
+//            }
+//        }
+
 
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                String addr = address.getText().toString().trim();
                 Toast.makeText(DeliveryDetailsActivity.this, "Order placed successfully", Toast.LENGTH_SHORT).show();
             }
         });
