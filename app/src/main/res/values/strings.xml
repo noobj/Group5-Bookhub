@@ -77,4 +77,5 @@
     <string name="tvOrdHisPrice">Price :</string>
     <string name="sampleHintEditOrderHisBuyer">28055 150 Blakely Avenue New West Minister</string>
     <string name="btnMarkAsDel">Mark as Delivered</string>
+    <string name="search">Search for books...</string>
 </resources>

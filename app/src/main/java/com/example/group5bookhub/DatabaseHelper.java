@@ -57,32 +57,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + BOOK_IMAGE + " TEXT,"
                 + " FOREIGN KEY ("+BOOK_SELLER+") REFERENCES "+TABLE1_NAME+"("+T1COL1+"));";
         sqLiteDatabase.execSQL(query);
-        query = "Insert into " + TABLE1_NAME
-                + "("
-                + T1COL2 + ","
-                + T1COL3 + ","
-                + T1COL4 + ","
-                + T1COL5 + ") Values (" +
-                "'admin',12345,'admin@gmail.com','Douglas College')";
-
-        sqLiteDatabase.execSQL(query);
-
-
-
-        query = "Insert into " + TABLE_BOOK
-                + "("
-                + BOOK_AUTHOR + ","
-                + BOOK_DESC + ","
-                + BOOK_SELLER + ","
-                + BOOK_PRICE + ","
-                + BOOK_TITLE + ","
-                + BOOK_FOR_SALE + ","
-                + BOOK_IMAGE +
-                ") Values (" +
-                "'Tony Faggioli','As our story unfolds, it becomes clear that there is hell, and then there is hell on earth.',1,18.99,'A Million to One: Beyond'," +
-                "1, 'bookcover2'),('Jennifer L. Armentrout','Samantha is a stranger in her own life.',1,8.99,'Don''t Look Back',1, 'bookcover1')";
-
-        sqLiteDatabase.execSQL(query);
+//        query = "Insert into " + TABLE1_NAME
+//                + "("
+//                + T1COL2 + ","
+//                + T1COL3 + ","
+//                + T1COL4 + ","
+//                + T1COL5 + ") Values (" +
+//                "'admin',12345,'admin@gmail.com','Douglas College')";
+//
+//        sqLiteDatabase.execSQL(query);
+//
+//
+//
+//        query = "Insert into " + TABLE_BOOK
+//                + "("
+//                + BOOK_AUTHOR + ","
+//                + BOOK_DESC + ","
+//                + BOOK_SELLER + ","
+//                + BOOK_PRICE + ","
+//                + BOOK_TITLE + ","
+//                + BOOK_FOR_SALE + ","
+//                + BOOK_IMAGE +
+//                ") Values (" +
+//                "'Tony Faggioli','As our story unfolds, it becomes clear that there is hell, and then there is hell on earth.',1,18.99,'A Million to One: Beyond'," +
+//                "1, 'bookcover2'),('Jennifer L. Armentrout','Samantha is a stranger in her own life.',1,8.99,'Don''t Look Back',1, 'bookcover1')";
+//
+//        sqLiteDatabase.execSQL(query);
     }
 
     @Override
