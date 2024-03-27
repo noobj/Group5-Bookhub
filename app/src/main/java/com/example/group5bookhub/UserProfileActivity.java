@@ -75,7 +75,12 @@ public class UserProfileActivity extends AppCompatActivity {
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserProfileActivity.this, EditProfileActivity.class));
+                //pass the user details to EditProfileActivity
+                Intent intent = new Intent(UserProfileActivity.this,EditProfileActivity.class);
+                intent.putExtra("userName", name.getText().toString());
+                intent.putExtra("userAddress", address.getText().toString());
+                intent.putExtra("userEmail", email.getText().toString());
+                startActivity(intent);
             }
         });
 

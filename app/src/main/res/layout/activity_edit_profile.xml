@@ -71,7 +71,7 @@
         app:layout_constraintHorizontal_bias="0.108"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.347" />
+        app:layout_constraintVertical_bias="0.389" />
 
     <EditText
         android:id="@+id/edTxtUserAddress"
@@ -85,44 +85,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.63"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415"
+        app:layout_constraintVertical_bias="0.482"
         tools:ignore="LabelFor" />
-
-    <TextView
-        android:id="@+id/tvUserPhne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tvUserPhone"
-        android:textColor="@color/text"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.102"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
-
-    <EditText
-        android:id="@+id/edTxtUserPhone"
-        android:layout_width="323dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:inputType="number"
-        android:text="@string/sampleUserPhoneHint"
-        android:textColor="@color/text"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.329"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.578"
-        tools:ignore="LabelFor,TextFields"
-        android:autofillHints="" />
 
     <TextView
         android:id="@+id/tvUserEml"
@@ -137,12 +103,13 @@
         app:layout_constraintHorizontal_bias="0.099"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.653" />
+        app:layout_constraintVertical_bias="0.589" />
 
     <EditText
         android:id="@+id/edTxtUserEmail"
         android:layout_width="333dp"
         android:layout_height="50dp"
+        android:autofillHints=""
         android:ems="10"
         android:inputType="text"
         android:text="@string/sampleUserEmailHint"
@@ -150,12 +117,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.371"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.738"
-        tools:ignore="LabelFor,TextFields"
-        android:autofillHints="" />
+        app:layout_constraintVertical_bias="0.687"
+        tools:ignore="LabelFor,TextFields" />
 
     <Button
         android:id="@+id/btnUserUpdate"

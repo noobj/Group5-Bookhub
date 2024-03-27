@@ -204,4 +204,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return sqLiteDatabase.rawQuery(query, new String[]{String.valueOf(bookId)});
     }
 
+    public boolean updateUserDetails(int userId,String userName,String userAddress,String userEmail){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(T1COL2,userName);
+        values.put(T1COL5,userAddress);
+        values.put(T1COL4,userEmail);
+        int u = sqLiteDatabase.update(TABLE1_NAME,values,"id=?",
+                new String[]{Integer.toString(userId)});
+        return u > 0;
+    }
 }
