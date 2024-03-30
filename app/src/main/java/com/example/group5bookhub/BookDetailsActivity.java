@@ -25,6 +25,8 @@ public class BookDetailsActivity extends AppCompatActivity {
     Button btnBuy;
     Button btnBack;
     int bookId;
+    int sellerId = 0;
+    int userId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                 String image = cursor.getString(index);
                 int imageResource = getResources().getIdentifier(image, "drawable", getPackageName());
                 index = cursor.getColumnIndex(DatabaseHelper.BOOK_SELLER);
-                int sellerId = cursor.getInt(index);
+                sellerId = cursor.getInt(index);
                 index = cursor.getColumnIndex(DatabaseHelper.BOOK_FOR_SALE);
                 int isSale = cursor.getInt(index);
 
@@ -74,7 +76,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                 //Retrieve userId from SharedPreferences
                 SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
                 //set default value when userId not found
-                int userId = sharedPreferences.getInt("userId", -1);
+                userId = sharedPreferences.getInt("userId", -1);
 
                 //Check if userId is equal to sellerId
                 if(userId == sellerId) {
@@ -93,10 +95,13 @@ public class BookDetailsActivity extends AppCompatActivity {
 
 
         btnBuy.setOnClickListener(new View.OnClickListener() {
+            final SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BookDetailsActivity.this, DeliveryDetailsActivity.class);
                 intent.putExtra("BOOK_ID", bookId);
+                intent.putExtra("BOOK_BUYER", userId);
+                intent.putExtra("BOOK_SELLER", sellerId);
                 startActivity(intent);
             }
         });
