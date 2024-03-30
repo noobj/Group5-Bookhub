@@ -15,8 +15,8 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     final static String DATABASE_NAME ="Bookhub.db";
-    final static int DATABASE_VERSION = 6;
-    final static String TABLE1_NAME = "User";
+    final static int DATABASE_VERSION = 8;
+    final static String TABLE1_NAME = "Users";
     final static String T1COL1 = "ID";
     final static String T1COL2 = "Username";
     final static String T1COL3 = "Password";
@@ -24,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     final static String T1COL5 = "Address";
 
 
-    final static String TABLE_BOOK = "Book";
+    final static String TABLE_BOOK = "Books";
     final static String BOOK_ID = "ID";
     final static String BOOK_TITLE = "Title";
     final static String BOOK_AUTHOR = "Author";
@@ -80,7 +80,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + ORDER_STATUS + " TINYINT,"
                 + ORDER_SELLER + " INTEGER,"
                 + ORDER_BOOK + " INTEGER,"
-                + " FOREIGN KEY ("+BOOK_SELLER+") REFERENCES "+TABLE1_NAME+"("+T1COL1+"));";
+                + " FOREIGN KEY ("+BOOK_SELLER+") REFERENCES "+TABLE1_NAME+"("+T1COL1+"),"
+                + " FOREIGN KEY ("+ORDER_BUYER+") REFERENCES "+TABLE1_NAME+"("+T1COL1+"),"
+                + " FOREIGN KEY ("+ORDER_BOOK+") REFERENCES "+TABLE_BOOK+"("+BOOK_ID+"));";
         sqLiteDatabase.execSQL(query);
 
         query = "Insert into " + TABLE1_NAME
