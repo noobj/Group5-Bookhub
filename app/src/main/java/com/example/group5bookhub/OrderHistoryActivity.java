@@ -2,7 +2,9 @@ package com.example.group5bookhub;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -15,6 +17,7 @@ import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
@@ -45,18 +48,55 @@ public class OrderHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
 
+        // Initialize Database helper
         databaseHelper = new DatabaseHelper(this);
+        // Initialize ListViews
         lsBought = findViewById(R.id.lsBought);
         lsSold = findViewById(R.id.lsSold);
+
+        // Set the tabs
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.addTab(tabLayout.newTab().setText("Books Bought"));
+        tabLayout.addTab(tabLayout.newTab().setText("Books Sold"));
 
         //Retrieve userId from SharedPreferences
         sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         //set default value when userId not found
         userId = sharedPreferences.getInt("userId", -1);
-        
+
         fetchBoughtOrders();
+        fetchSoldOrders();
+
+        // Set the initial visibility of the lists
+        lsBought.setVisibility(View.VISIBLE);
+        lsSold.setVisibility(View.GONE);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 0) {
+                    lsBought.setVisibility(View.VISIBLE);
+                    lsSold.setVisibility(View.GONE);
+                } else {
+                    lsBought.setVisibility(View.GONE);
+                    lsSold.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
+
+        // Set adapters for lists
         adapterBought = new CustomAdapterBought(this, objListBought);
         lsBought.setAdapter(adapterBought);
+
+        adapterSold = new CustomAdapterSold(this, objListSold);
+        lsSold.setAdapter(adapterSold);
+
         lsBought.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -69,10 +109,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
             }
         });
 
-
-        fetchSoldOrders();
-        adapterSold = new CustomAdapterSold(this, objListSold);
-        lsSold.setAdapter(adapterSold);
         lsSold.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
