@@ -40,26 +40,6 @@ public class DeliveryDetailsActivity extends AppCompatActivity {
         buyerId = intent.getIntExtra("BOOK_BUYER", -1);
         sellerId = intent.getIntExtra("BOOK_SELLER", -1);
 
-//        //Retrieve userId from SharedPreferences
-//        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
-//        //set default value when userId not found
-//        buyerId = sharedPreferences.getInt("userId", -1);
-//
-//        //Receive data from intent
-//        Intent intent = getIntent();
-//        if (intent != null) {
-//            //Retrieve bookId from intent
-//            bookId = intent.getIntExtra("BOOK_ID", -1);
-//
-//            //Retrieve book details from database using bookId
-//            DatabaseHelper databaseHelper = new DatabaseHelper(this);
-//            Cursor cursor = databaseHelper.getBookById(bookId);
-//            if (cursor != null && cursor.moveToFirst()) {
-//                int index = cursor.getColumnIndex(DatabaseHelper.BOOK_SELLER);
-//                sellerId = cursor.getInt(index);
-//            }
-//        }
-
 
         order.setOnClickListener(new View.OnClickListener() {
             @Override
