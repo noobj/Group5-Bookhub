@@ -24,15 +24,21 @@ public class DeliveryDetailsActivity extends AppCompatActivity {
     int bookId;
     int buyerId;
     int sellerId;
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery_details);
+        Intent intent = getIntent();
 
+        databaseHelper = new DatabaseHelper(this);
         address = findViewById(R.id.edTextAddress);
         order = findViewById(R.id.btnOrder);
         cancel = findViewById(R.id.btnCancel);
+        bookId = intent.getIntExtra("BOOK_ID", -1);
+        buyerId = intent.getIntExtra("BOOK_BUYER", -1);
+        sellerId = intent.getIntExtra("BOOK_SELLER", -1);
 
 //        //Retrieve userId from SharedPreferences
 //        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
@@ -58,8 +64,10 @@ public class DeliveryDetailsActivity extends AppCompatActivity {
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String addr = address.getText().toString().trim();
+                String addr = address.getText().toString().trim();
+                databaseHelper.insertOrder(bookId, buyerId, addr, sellerId);
                 Toast.makeText(DeliveryDetailsActivity.this, "Order placed successfully", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DeliveryDetailsActivity.this, BuyBookActivity.class));
             }
         });
 
