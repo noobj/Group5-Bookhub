@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,69 +20,68 @@ import java.util.ArrayList;
 
 public class OrderHistoryActivity extends AppCompatActivity {
 
+    DatabaseHelper databaseHelper;
+    ListView lsBought;
+    ListView lsSold;
+    ArrayList<String> bookTitlesBought;
+    ArrayList<Integer> bookImagesBought;
+    ArrayList<String> bookPricesBought;
+    ArrayList<Integer> orderIdsBought;
+    ArrayList<String> bookTitlesSold;
+    ArrayList<Integer> bookImagesSold;
+    ArrayList<String> bookPricesSold;
+    ArrayList<Integer> orderIdsSold;
+
+    CustomAdapterBought adapterBought;
+    CustomAdapterSold adapterSold;
+    ArrayList<ImageAndText> objListBought;
+    ArrayList<ImageAndText> objListSold;
+
+    SharedPreferences sharedPreferences;
+
+    int userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
 
-        String[] booksBought = {"Book1", "Book2", "Book3", "Book4", "Book5"};
-        String[] booksSold = {"Book6", "Book7", "Book8", "Book9", "Book10"};
-        String[] status = {"Delivered", "In Transit"};
+        databaseHelper = new DatabaseHelper(this);
+        lsBought = findViewById(R.id.lsBought);
+        lsSold = findViewById(R.id.lsSold);
 
-        ListView lsBought = findViewById(R.id.lsBought);
-        ListView lsSold = findViewById(R.id.lsSold);
-
-        ArrayList<ImageAndText> listBought = new ArrayList<>();
-        listBought.add(new ImageAndText("Book1", R.drawable.bookcover1, "Delivered"));
-        listBought.add(new ImageAndText("Book2", R.drawable.bookcover2, "In Transit"));
-        listBought.add(new ImageAndText("Book3", R.drawable.bookcover3, "Delivered"));
-        listBought.add(new ImageAndText("Book4", R.drawable.bookcover1, "Delivered"));
-        listBought.add(new ImageAndText("Book5", R.drawable.bookcover2, "In Transit"));
-
-        ListAdapter adapterBought = new CustomAdapterBought(this, listBought);
+        //Retrieve userId from SharedPreferences
+        sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        //set default value when userId not found
+        userId = sharedPreferences.getInt("userId", -1);
+        
+        fetchBoughtOrders();
+        adapterBought = new CustomAdapterBought(this, objListBought);
         lsBought.setAdapter(adapterBought);
         lsBought.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                }
+                Intent intent = new Intent(OrderHistoryActivity.this, OrderHistoryDetailsActivity.class);
+                intent.putExtra("ORDER_ID", orderIdsBought.get(position));
+                intent.putExtra("BOOK_TITLE", bookTitlesBought.get(position));
+                intent.putExtra("BOOK_IMAGE", bookImagesBought.get(position));
+                intent.putExtra("BOOK_PRICE", bookPricesBought.get(position));
+                startActivity(intent);
             }
         });
 
-        ArrayList<ImageAndText> listSold = new ArrayList<>();
-        listSold.add(new ImageAndText("Book6", R.drawable.bookcover4));
-        listSold.add(new ImageAndText("Book7", R.drawable.bookcover5));
-        listSold.add(new ImageAndText("Book8", R.drawable.bookcover3));
-        listSold.add(new ImageAndText("Book9", R.drawable.bookcover4));
-        listSold.add(new ImageAndText("Book10", R.drawable.bookcover5));
 
-        ListAdapter adapterSold = new CustomAdapterSold(this, listSold);
+        fetchSoldOrders();
+        adapterSold = new CustomAdapterSold(this, objListSold);
         lsSold.setAdapter(adapterSold);
         lsSold.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                }
+                Intent intent = new Intent(OrderHistoryActivity.this, OrderHistoryDetailsActivity.class);
+                intent.putExtra("ORDER_ID", orderIdsSold.get(position));
+                intent.putExtra("BOOK_TITLE", bookTitlesSold.get(position));
+                intent.putExtra("BOOK_IMAGE", bookImagesSold.get(position));
+                intent.putExtra("BOOK_PRICE", bookPricesSold.get(position));
+                startActivity(intent);
             }
         });
 
@@ -109,5 +110,91 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    private void fetchBoughtOrders(){
+        objListBought = new ArrayList<>();
+        orderIdsBought = new ArrayList<>();
+        bookTitlesBought = new ArrayList<>();
+        bookImagesBought = new ArrayList<>();
+        bookPricesBought = new ArrayList<>();
+        Cursor cursor = databaseHelper.getOrderByBuyerId(userId);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int orderIdIndex = cursor.getColumnIndex(DatabaseHelper.ORDER_ID);
+                int orderId = cursor.getInt(orderIdIndex);
+                orderIdsBought.add(orderId);
+                int bookIdIndex = cursor.getColumnIndex(DatabaseHelper.ORDER_BOOK);
+                int bookId = cursor.getInt(bookIdIndex);
+                Cursor bookCursor = databaseHelper.getBookById(bookId);
+                if (bookCursor != null && bookCursor.moveToFirst()) {
+                    int titleIndex = bookCursor.getColumnIndex(DatabaseHelper.BOOK_TITLE);
+                    String title = bookCursor.getString(titleIndex);
+                    bookTitlesBought.add(title);
+                    int imageIndex = bookCursor.getColumnIndex(DatabaseHelper.BOOK_IMAGE);
+                    String imageName = bookCursor.getString(imageIndex);
+                    int imageResource = getResources().getIdentifier(imageName, "drawable", getPackageName());
+                    bookImagesBought.add(imageResource);
+                    int statusIndex = cursor.getColumnIndex(DatabaseHelper.ORDER_STATUS);
+                    int statusValue = cursor.getInt(statusIndex);
+                    String status;
+                    if (statusValue == 1)
+                        status = "Delivered";
+                    else status = "In Transit";
+                    objListBought.add(new ImageAndText(title, imageResource, status));
+                    int priceIndex = bookCursor.getColumnIndex(DatabaseHelper.BOOK_PRICE);
+                    String price = bookCursor.getString(priceIndex);
+                    bookPricesBought.add(price);
+                }
+                if (bookCursor != null) {
+                    bookCursor.close();
+                }
+            }
+            while (cursor.moveToNext());
+            cursor.close();
+        }
+    }
+
+    private void fetchSoldOrders(){
+        objListSold = new ArrayList<>();
+        orderIdsSold = new ArrayList<>();
+        bookTitlesSold = new ArrayList<>();
+        bookImagesSold = new ArrayList<>();
+        bookPricesSold = new ArrayList<>();
+        Cursor cursor = databaseHelper.getOrderBySellerId(userId);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int orderIdIndex = cursor.getColumnIndex(DatabaseHelper.ORDER_ID);
+                int orderId = cursor.getInt(orderIdIndex);
+                orderIdsSold.add(orderId);
+                int bookIdIndex = cursor.getColumnIndex(DatabaseHelper.ORDER_BOOK);
+                int bookId = cursor.getInt(bookIdIndex);
+                Cursor bookCursor = databaseHelper.getBookById(bookId);
+                if (bookCursor != null && bookCursor.moveToFirst()) {
+                    int titleIndex = bookCursor.getColumnIndex(DatabaseHelper.BOOK_TITLE);
+                    String title = bookCursor.getString(titleIndex);
+                    bookTitlesSold.add(title);
+                    int imageIndex = bookCursor.getColumnIndex(DatabaseHelper.BOOK_IMAGE);
+                    String imageName = bookCursor.getString(imageIndex);
+                    int imageResource = getResources().getIdentifier(imageName, "drawable", getPackageName());
+                    bookImagesSold.add(imageResource);
+                    int statusIndex = cursor.getColumnIndex(DatabaseHelper.ORDER_STATUS);
+                    int statusValue = cursor.getInt(statusIndex);
+                    String status;
+                    if (statusValue == 1)
+                        status = "Delivered";
+                    else status = "In Transit";
+                    objListSold.add(new ImageAndText(title, imageResource, status));
+                    int priceIndex = bookCursor.getColumnIndex(DatabaseHelper.BOOK_PRICE);
+                    String price = bookCursor.getString(priceIndex);
+                    bookPricesSold.add(price);
+                }
+                if (bookCursor != null) {
+                    bookCursor.close();
+                }
+            }
+            while (cursor.moveToNext());
+            cursor.close();
+        }
     }
 }

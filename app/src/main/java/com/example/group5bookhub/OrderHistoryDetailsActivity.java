@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,6 +22,8 @@ public class OrderHistoryDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history_details);
+        Intent intent = getIntent();
+
 
         TextView orderBookName = findViewById(R.id.tvOrdHisBookName);
         TextView orderStatus = findViewById(R.id.tvOrHiStatus);
@@ -28,12 +31,22 @@ public class OrderHistoryDetailsActivity extends AppCompatActivity {
         TextView orderDate = findViewById(R.id.tvOrHiDate);
         TextView orderPrice = findViewById(R.id.tvOrHiPrice);
         Button editButton = findViewById(R.id.btnEditOrdHis);
+        ImageView orderBookImg = findViewById(R.id.imgVbook);
 
-        orderBookName.setText("Don't Look Back");
-        orderStatus.setText("In Transit");
-        orderAddress.setText("28055 150 Blakely Avenue New Westminister");
-        orderDate.setText("29/01/2024");
-        orderPrice.setText("$40");
+        int orderId = intent.getIntExtra("ORDER_ID", -1);
+        String bookTitle = intent.getStringExtra("BOOK_TITLE");
+        int bookImage = intent.getIntExtra("BOOK_IMAGE", -1);
+        String bookPrice = intent.getStringExtra("BOOK_PRICE");
+        orderBookName.setText(bookTitle);
+        orderPrice.setText(bookPrice);
+        orderBookImg.setImageResource(bookImage);
+
+
+//        orderBookName.setText("Don't Look Back");
+//        orderStatus.setText("In Transit");
+//        orderAddress.setText("28055 150 Blakely Avenue New Westminister");
+//        orderDate.setText("29/01/2024");
+//        orderPrice.setText("$40");
 
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +58,7 @@ public class OrderHistoryDetailsActivity extends AppCompatActivity {
         // Bottom navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        bottomNavigationView.setSelectedItemId(R.id.profile);
+        bottomNavigationView.setSelectedItemId(R.id.order);
 
 
 //      // Perform item selected listener
