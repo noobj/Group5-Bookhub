@@ -259,4 +259,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return u > 0;
     }
+
+    public boolean updateOrderAddress(int orderId,String address){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ORDER_ADDRESS,address);
+        int u = sqLiteDatabase.update(TABLE_ORDER,values,"id=?",
+                new String[]{Integer.toString(orderId)});
+        return u > 0;
+    }
+
+    public Cursor getOrderById(int orderId) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_ORDER + " WHERE ID='" + orderId + "'";
+        return sqLiteDatabase.rawQuery(query, null);
+    }
 }
