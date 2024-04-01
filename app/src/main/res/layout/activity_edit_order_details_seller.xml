@@ -9,31 +9,30 @@
 
     <TextView
         android:id="@+id/tvOrdHisBName"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_width="271dp"
+        android:layout_height="92dp"
         android:textColor="@color/text"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.763"
+        app:layout_constraintHorizontal_bias="0.885"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.086"
+        app:layout_constraintVertical_bias="0.065"
         tools:ignore="TextSizeCheck" />
 
     <ImageView
-        android:id="@+id/imgVwbook"
-        android:layout_width="124dp"
-        android:layout_height="129dp"
+        android:id="@+id/imgVbookSeller"
+        android:layout_width="97dp"
+        android:layout_height="124dp"
         android:contentDescription="@string/image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintHorizontal_bias="0.048"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.03"
-        app:srcCompat="@drawable/bookcover1" />
+        app:layout_constraintVertical_bias="0.051" />
 
     <TextView
         android:id="@+id/tvAddr"

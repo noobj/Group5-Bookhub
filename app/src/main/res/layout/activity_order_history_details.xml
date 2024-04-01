@@ -9,30 +9,30 @@
 
     <TextView
         android:id="@+id/tvOrdHisBookName"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_width="248dp"
+        android:layout_height="88dp"
         android:textColor="@color/text"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.763"
+        app:layout_constraintHorizontal_bias="0.821"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.086"
+        app:layout_constraintVertical_bias="0.049"
         tools:ignore="TextSizeCheck" />
 
     <ImageView
         android:id="@+id/imgVbook"
-        android:layout_width="124dp"
+        android:layout_width="95dp"
         android:layout_height="129dp"
         android:contentDescription="@string/image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintHorizontal_bias="0.078"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.03" />
+        app:layout_constraintVertical_bias="0.026" />
 
     <TextView
         android:id="@+id/tvBookStatus"
@@ -96,8 +96,8 @@
 
     <Button
         android:id="@+id/btnEditOrdHis"
-        android:layout_width="130dp"
-        android:layout_height="54dp"
+        android:layout_width="142dp"
+        android:layout_height="57dp"
         android:backgroundTint="@color/text"
         android:text="@string/btnEditOrdHis"
         android:textColor="@color/white"
